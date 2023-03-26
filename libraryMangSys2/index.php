@@ -11,10 +11,15 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
   <link rel="stylesheet" href="css/style.css">
-  
+
 
   <style>
-    
+    .nav-custom {
+
+      margin-top: 40px;
+
+
+    }
   </style>
   <!-- <script>
   $(document).ready(function () {
@@ -29,37 +34,12 @@
 
 <body>
 
-<?php include 'partials/_topbar.php'; ?>
+  <?php 
+include 'partials/_dbconnect.php';
+  
+  include 'partials/_topbar.php'; ?>
 
   <?php include '_header.php'; ?>
-
-<!--   
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-      <span class="navbar-toggler-icon">hiiiiiiihiiiiiiihiiiiiiihiiiiiiihiiiiiii</span>
-    </button>
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close">hiiiiiii</button>
-      </div>
-      <div class="offcanvas-body">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</nav> -->
 
 
 
@@ -79,14 +59,20 @@
   </div>
 
 
-  <?php include 'partials/_topbar.php';
-  include '_header.php';
-
-  
 
 
+<?php
 
-for ($y = 1; $y <= 5; $y++){
+
+
+$sql = "SELECT * FROM `books` GROUP BY(book_group)";
+$result = mysqli_query($conn, $sql);
+
+            
+while ($row = mysqli_fetch_assoc($result)){
+
+    $group = $row['book_group'];
+    // $group_desc = $row['book_group_desc'];
   echo '
   <div class="container mt-3 mb-5 ">
   <!-- <h3>Recommended</h3> -->
@@ -97,12 +83,23 @@ for ($y = 1; $y <= 5; $y++){
 
 
           <div class="booksmedia-fullwidth booksmedia-popular-list">
-            <h2 class="section-title text-center" style="position: absolute;">Popular Items</h2>
-            <div class="container"> <p class="text-center style="position: absolute;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></div>
+            <h2 class="section-title text-center" style="position: absolute;">'.$group.'</h2>
+            <p class="lead text-center">here book group descriptions</p>
             <ul class="popular-items-detail-v1">';
 
-             
-              for ($x = 1; $x <= 100; $x++) {
+            $sql1 = "SELECT * FROM books WHERE book_group = '$group';";
+            $result1 = mysqli_query($conn, $sql1);
+            
+              while ($row1 = mysqli_fetch_assoc($result1)) {
+                
+                $id = $row1['book_id'];
+                $name = $row1['book_name'];
+                $author = $row1['book_author'];
+                $descr = $row1['book_description'];
+
+
+
+
                 // echo '<div class="book">
                 //   <img src="img/test3.jpg" alt="Book cover" height="300">
                 //   <p class="text-center mt-2">Book Title' . $x . '</p>
@@ -114,45 +111,23 @@ for ($y = 1; $y <= 5; $y++){
             <li>
                 <div class="book-list-icon blue-icon"></div>
                 <figure>
-                    <img src="img/testi2.jpg" alt="Book">
+                    <img src="img/'.$id.'.jpg" alt="Book">
                     <figcaption>
                         <header>
-                            <h4><a href="#.">The Great Gatsby</a></h4>
-                            <p><strong>Author:</strong>  F. Scott Fitzgerald</p>
-                            <p><strong>ISBN:</strong>  9781581573268</p>
+                            <h4><a href="borrow.php?bookId='.$id.' ">'.$name.'</a></h4>
+                            <p><strong>Author:</strong>  '.$author.'</p>
+                            <p><strong>book-id:</strong>  '.$id.'</p>
                         </header>
-                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. Pellentesque dolor turpis, pulvinar varius.</p>
+                        <p>'.$descr.'.</p>
                         <div class="actions">
                             <ul>
-                                <li>
-                                    <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Add To Cart">
-                                        <i class="fa fa-shopping-cart"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Like">
-                                        <i class="fa fa-heart"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Mail"><i class="fa fa-envelope"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Search">
-                                        <i class="fa fa-search"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Print">
-                                        <i class="fa fa-print"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Print">
-                                        <i class="fa fa-share-alt"></i>
-                                    </a>
-                                </li>
+                            <li>
+                            <a href="borrow.php?bookId='.$id.' " class="btn btn-primary custom custom-borrow">Borrow</a>
+                            </li>
+                            <li>
+                            <li>
+                            <a href="discussions2.php?bookId=' . $id . '" class="btn btn-primary custom">Reviews</a>
+                            </li>
                             </ul>
                         </div>
                     </figcaption>
@@ -173,7 +148,7 @@ echo '
   echo '</div>';
   ?>
 
-
+<!-- ' . $id . ' -->
 
   <!-- <script>
     // Select the scrollbar and buttons
@@ -200,19 +175,19 @@ echo '
 
 
 
-<!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-            </script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-            </script>
-        <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+  <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
             integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
             </script> -->
 
-<!-- <script>
+  <!-- <script>
   var scrollpos = window.scrollX;
   var delta = 10;
   

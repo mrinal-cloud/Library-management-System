@@ -101,8 +101,12 @@
     
     <!-- Custom styles for this template -->
     <link href="features.css" rel="stylesheet">
+  
+
   </head>
   <body>
+<?php include '_header.php'?>
+
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="bootstrap" viewBox="0 0 118 94">
     <title>Bootstrap</title>
@@ -443,7 +447,6 @@
   </div>
 </main>
 
-<?php include '/projects/librarymangsys2/_header.php'?>
 <!-- kia nahei nav-bar -->
 
     

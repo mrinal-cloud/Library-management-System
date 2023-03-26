@@ -9,23 +9,24 @@ body {
 }
 
 .nav-custom {
-    background-color: rgb(27, 28, 14);
-    /* rgb(88, 96, 12); */
+    background-color: rgba(2, 24, 28, 0.892);
+    /* rgb(27, 28, 14); */
     padding-left: 40px;
     margin-left: 60px;
     margin-right: 60px;
-    margin-top: 70px;
+    margin-top: 40px;
 
 
 }
 
 .dropdown-menu.show {
-    background-color: rgb(198, 161, 97);
+    background-color: rgb(40, 31, 18);
 }
 .top-custom {
-    background-color: rgba(146, 149, 119, 0.304);
+    background-color: rgba(212, 216, 100, 0.914);
+    color: rgb(7, 7, 7);
     /* rgb(88, 96, 12); */
-    padding: 15px;
+    /* padding: 15px; */
     /* padding-left: 5px; */
     /* padding-right: 5px; */
     /* margin-left: 60px; */
@@ -52,10 +53,29 @@ body {
     display: inline-block;
     margin-right: 15px;
 }
-.var{
+
+
+/* viewer */
+
+
+
+/* admin */
+.var2{
     color: rgb(56, 69, 121);
-    background-color: red;
+    background-color: rgb(21, 83, 44);
 }
+.var3{
+  /* reader */
+  color: rgb(175, 182, 55);
+  background-color: rgb(44, 69, 179);
+}
+
+
+.var{
+  color: rgb(233, 226, 41);
+  font-size: large;
+}
+
 
 .fixed-heading {
     position: fixed;
@@ -67,8 +87,23 @@ body {
 }
 
 
+.cust-reader
+{
+  font-weight: bolder;
+  margin: 30px;
+  color: rgba(62, 62, 224, 0.696);
+}
 
+/* .cust-reader{
+  font-weight: bolder;
+  margin: 30px;
+} */
 
+.cust-admin{
+  font-weight: bolder;
+  margin: 30px;
+  color: rgb(30, 90, 40);
+}
 
 
 
@@ -290,9 +325,10 @@ body {
 
   .actions {
     display: block;
-    background-color: #fff;
-    padding: 20px 0;
-    margin: 28px -15px 0;
+    background-color: #000000;
+    padding: 30px;
+    margin: 28px -15px;
+    margin-top: 20px;
     text-align: center;
     -webkit-box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.07);
     -moz-box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.07);
@@ -306,8 +342,7 @@ body {
   .actions ul li {
     display: inline-block;
     border: none;
-    padding: 0 19px;
-    margin: 0;
+    margin-right: 5px;
     width: auto;
   }
   @media (max-width: 1199px) {
@@ -316,15 +351,22 @@ body {
     }
   }
   .actions ul li a {
-    color: #282828;
+    color: #10100e;
+    background-color: rgb(67, 154, 231);
     font-size: 16px;
   }
   .actions ul li a:hover {
-    color: #ff7236;
+    color: #000708;
   }
   .actions ul li:hover {
     box-shadow: none;
   }
+
+  /* .custom{
+    margin-left: 5px;
+    height: 40px;
+    width: 10px;
+  } */
 
   .detailed-box .post-center-content .actions {
     background-color: #f3f3f3;
@@ -369,3 +411,12 @@ body {
     height: 330px;
     max-width: 100%;
   }
+
+  .display-4{
+    text-align: center;
+  }
+
+.jumbo-size{
+  height: 100px;
+  width: 400px;
+}

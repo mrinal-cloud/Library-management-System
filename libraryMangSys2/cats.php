@@ -64,14 +64,27 @@
 </head>
 
 <body>
-  <?php include 'partials/_topbar.php';
+  <?php 
+  include 'partials/_dbconnect.php';
+  include 'partials/_topbar.php';
   include '_header.php';
 
   
 
+// $bookNums=0;
 
 
-for ($y = 1; $y <= 5; $y++){
+$sql = "SELECT * FROM `books` GROUP BY(book_group)";
+$result = mysqli_query($conn, $sql);
+
+
+
+
+
+            
+while ($row = mysqli_fetch_assoc($result)){
+    $group = $row['book_group'];
+    // $group_desc = $row['book_group_desc'];
   echo '
   <div class="container mt-3 mb-5 ">
   <!-- <h3>Recommended</h3> -->
@@ -82,12 +95,23 @@ for ($y = 1; $y <= 5; $y++){
 
 
           <div class="booksmedia-fullwidth booksmedia-popular-list">
-            <h2 class="section-title text-center" style="position: absolute;">Popular Items</h2>
-            <p class="lead text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <h2 class="section-title text-center" style="position: absolute;">'.$group.'</h2>
+            <p class="lead text-center">here book group descriptions</p>
             <ul class="popular-items-detail-v1">';
 
-             
-              for ($x = 1; $x <= 100; $x++) {
+            $sql1 = "SELECT * FROM books WHERE book_group = '$group';";
+            $result1 = mysqli_query($conn, $sql1);
+            
+              while ($row = mysqli_fetch_assoc($result1)) {
+                
+                $id = $row['book_id'];
+                $name = $row['book_name'];
+                $author = $row['book_author'];
+                $descr = $row['book_description'];
+
+
+
+
                 // echo '<div class="book">
                 //   <img src="img/test3.jpg" alt="Book cover" height="300">
                 //   <p class="text-center mt-2">Book Title' . $x . '</p>
@@ -99,45 +123,23 @@ for ($y = 1; $y <= 5; $y++){
             <li>
                 <div class="book-list-icon blue-icon"></div>
                 <figure>
-                    <img src="img/testi2.jpg" alt="Book">
+                    <img src="img/'.$id.'.jpg" alt="Book">
                     <figcaption>
                         <header>
-                            <h4><a href="#.">The Great Gatsby</a></h4>
-                            <p><strong>Author:</strong>  F. Scott Fitzgerald</p>
-                            <p><strong>ISBN:</strong>  9781581573268</p>
+                            <h4><a href="borrow.php?bookId='.$id.' ">'.$name.'</a></h4>
+                            <p><strong>Author:</strong>  '.$author.'</p>
+                            <p><strong>book-id:</strong>  '.$id.'</p>
                         </header>
-                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. Pellentesque dolor turpis, pulvinar varius.</p>
+                        <p>'.$descr.'.</p>
                         <div class="actions">
                             <ul>
-                                <li>
-                                    <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Add To Cart">
-                                        <i class="fa fa-shopping-cart"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Like">
-                                        <i class="fa fa-heart"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Mail"><i class="fa fa-envelope"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Search">
-                                        <i class="fa fa-search"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Print">
-                                        <i class="fa fa-print"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Print">
-                                        <i class="fa fa-share-alt"></i>
-                                    </a>
-                                </li>
+                            <li>
+                            <a href="borrow.php?bookId='.$id.' " class="btn btn-primary">Borrow</a>
+                            </li>
+                            <li>
+                            <li>
+                            <a href="discussions2.php?bookId=' . $id . '" class="btn btn-primary">Reviews</a>
+                            </li>
                             </ul>
                         </div>
                     </figcaption>
