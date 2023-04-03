@@ -20,6 +20,23 @@
 
 
     }
+
+  .custom {
+  max-height: 100px;
+  /* max-width: 100%; */
+  overflow: hidden;
+  /* text-overflow: ellipsis; */
+  /* white-space: nowrap; */
+  /* display: inline-block; */
+  /* margin-top: 10px; */
+  cursor: pointer;
+  /* color: red; */
+}
+.read-more {
+  display: inline-block;
+  margin-top: 10px;
+  cursor: pointer;
+}
   </style>
   <!-- <script>
   $(document).ready(function () {
@@ -109,16 +126,17 @@ while ($row = mysqli_fetch_assoc($result)){
             
                                             
             <li>
-                <div class="book-list-icon blue-icon"></div>
+                <div class="book-list-icon blue-icon custom"></div>
                 <figure>
-                    <img src="img/'.$id.'.jpg" alt="Book">
+                    <img src="img/test.jpg" alt="Book">
                     <figcaption>
                         <header>
                             <h4><a href="borrow.php?bookId='.$id.' ">'.$name.'</a></h4>
                             <p><strong>Author:</strong>  '.$author.'</p>
                             <p><strong>book-id:</strong>  '.$id.'</p>
                         </header>
-                        <p>'.$descr.'.</p>
+                        <div>
+                        <p style="white-space: pre-wrap;">'.$descr.'.</p>
                         <div class="actions">
                             <ul>
                             <li>

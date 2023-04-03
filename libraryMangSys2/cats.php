@@ -123,7 +123,7 @@ while ($row = mysqli_fetch_assoc($result)){
             <li>
                 <div class="book-list-icon blue-icon"></div>
                 <figure>
-                    <img src="img/'.$id.'.jpg" alt="Book">
+                    <img src="img/test.jpg" alt="Book">
                     <figcaption>
                         <header>
                             <h4><a href="borrow.php?bookId='.$id.' ">'.$name.'</a></h4>
